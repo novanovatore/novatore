@@ -1,0 +1,53 @@
+{% extends "Aplicacion1/base.html" %}
+
+{% block title %} Blog: {{ categoria }} {% endblock %}
+
+{% block cabecera %}Categoría de Blog: {{ categoria }}{% endblock %}
+{% block content %} 
+
+
+{% if posts %}
+    {% for p in posts %}
+        <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+
+            <div class="card mb-4 rounded-3 shadow-sm">
+                    
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">{{p.titulo}}</h4>
+                  </div>    
+                  
+            <div class="card shadow-sm">
+                {% if p.imagen %}
+                    <img src="{{p.imagen.url}}" alt="imagen_{{p.titulo}}">
+                {% endif %}
+                <div class="card-body">
+                <p class="card-text">{% if p.contenido|length <= 50 %}{{p.contenido}}{% else %}{{p.contenido|slice:":50"}}...{% endif %}</p>
+                <small class="text-body-secondary">Autor del post: {{p.autor}}</small>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    
+                    <small class="text-body-secondary">{{p.updated}}</small>
+                </div>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    {% endfor %}
+
+{% else %}
+
+<p>Nada que mostrar aquí...</p>
+
+{% endif %}
+
+{% endblock %}

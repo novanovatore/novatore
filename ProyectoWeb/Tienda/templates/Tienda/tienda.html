@@ -1,0 +1,58 @@
+{% extends "Aplicacion1/base.html" %}
+
+{% block title %} Tienda {% endblock %}
+
+{% block cabecera %}Tienda{% endblock %}
+
+{% block content %}
+
+
+{% if request.user.is_authenticated %}
+    <div style="float: right; margin-right: 10px;">
+        {% include "Carro/widget.html" %}
+    </div> <!--end div carrito-->
+{% endif %}
+
+<div class="container">
+
+
+<div class="row">
+
+    {% for p in productos %}
+        <div class="col">
+        <div class="card" style="width: 15rem; margin-bottom: 5px;">
+        {% if p.imagen %}
+        <img src="{{p.imagen.url}}" class="card-img-top" alt="">
+        {% endif %}
+
+        <div style="text-align: center;">
+            <div class="card-body">
+            <h5 class="card-title">{{p.nombre}}</h5>
+            <p class="card-text">Precio: ${{p.precio}}</p>
+            <p class="card-text">Stock: {% if p.disponibilidad %}Sí{% else %}Agotado{% endif %}</p>
+            {% if request.user.is_authenticated %}
+                {% if p.disponibilidad %}
+                    <a href="{% url 'carro:agregar' p.id %}" class="btn btn-primary">Agregar al carro</a>
+                {% endif %}
+            {% else %}
+                <div class="alert alert-danger text-center">Ingresa para comprar</div>
+            {% endif %}
+            </div> <!--end card-body-->          
+        </div> <!--end text-align div-->
+
+        </div> <!--end card-->
+        </div> <!--end col-->
+    
+    {% endfor %}
+</div><!--end row-->    
+    
+</div> <!--end container-->
+
+
+        
+        
+
+
+
+
+{% endblock %}

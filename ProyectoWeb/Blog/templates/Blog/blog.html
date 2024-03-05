@@ -1,0 +1,64 @@
+{% extends "Aplicacion1/base.html" %}
+
+{% block title %} Blog {% endblock %}
+
+{% block cabecera %}Blog{% endblock %}
+
+{% block content %} 
+
+
+{% if posts %}
+<div class="container">
+    <div class="row">
+
+
+    {% for p in posts %}
+    <div class="album py-5 bg-body-tertiary">
+
+            <div class="card mb-4 rounded-3 shadow-sm">
+                    
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">{{p.titulo}}</h4>
+                </div><!--end div card header-->    
+                  
+            <div class="card shadow-sm">
+                {% if p.imagen %}
+                    <img src="{{p.imagen.url}}" alt="imagen_{{p.titulo}}">
+                {% endif %}
+                <div class="card-body">
+                <p class="card-text">{% if p.contenido|length <= 50 %}{{p.contenido}}{% else %}{{p.contenido|slice:":50"}}...{% endif %}</p>
+                <small class="text-body-secondary">Autor del post: {{p.autor}}</small>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div> <!--end div button-->
+                    
+                    <small class="text-body-secondary">{{p.updated}}</small>
+                </div> <!--end div footer-->
+                </div><!--end div card body-->
+            </div><!--end div card shadow-->
+            </div><!--end div card-->
+  
+        </div><!--end div album-->
+
+    {% endfor %}
+    </div><!--end div row-->
+</div><!--end div container-->
+    <section>
+        <div style="width: 75%; margin:auto; text-align: center; color:black">
+            Categorías:
+
+            {% for c in categorias %}
+                <a href="{% url 'categoria' c.id %}">{{ c }}</a>
+            {% endfor %}
+        </div><!--end div categorias-->
+    </section>
+
+{% else %}
+
+<p>Nada que mostrar aquí...</p>
+
+{% endif %}
+
+{% endblock %}

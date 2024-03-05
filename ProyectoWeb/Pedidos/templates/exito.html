@@ -1,0 +1,36 @@
+<h1>Pedido listo!</h1>
+
+
+<h2>Detalles del pedido:</h2>
+
+<h3>Pedido ID: {{pedido.id}}</h3>
+
+<table style="text-align: center;">
+<tr>
+    <th>Producto</th>
+    <th>Cantidad</th>
+    <th>Precio</th>
+</tr>
+
+
+{% for _, producto in carro.items %}
+<tr>
+    <td>
+        {{producto.nombre}}
+    </td>
+    <td>
+        {{producto.cantidad}}
+    </td>
+    <td>
+        {{producto.precio}}
+    </td>
+</tr>
+{% endfor %}
+<tr>
+    <td colspan="3">Total: CLP $: {{total}}</td>
+</tr>
+
+</table>
+
+
+<a href="{% url 'home' %}" class="btn btn-outline-primary me-2">Volver</a>
