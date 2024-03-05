@@ -147,7 +147,7 @@ EMAIL_HOST = 'smtp.gmail.com'  # Cambia esto por el host de tu servidor de corre
 EMAIL_PORT = 587  # Puerto de tu servidor de correo
 EMAIL_USE_TLS = True  # True si tu servidor de correo usa TLS
 EMAIL_HOST_USER = 'cuenta.prueba.dev15@gmail.com'  # Tu dirección de correo electrónico
-EMAIL_HOST_PASSWORD = ''  # Tu contraseña de correo electrónico
+EMAIL_HOST_PASSWORD = "zyoa difd bdyr edyq"  # Tu contraseña de correo electrónico
 
 
 # carga el paquete crispy-forms en bootstrap

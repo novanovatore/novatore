@@ -43,13 +43,6 @@ def procesar_pedido(request):
     # mandamos el email con el pedido
     envio_email(pedido, linea_pedido_carro, request.user)
 
-    # le informamos al usuario el exito de la operacion
-    messages.success(
-        request,
-        ("Pedido realizado correctamente.",
-        "Se le envío al correo la información de su pedido")
-    )
-
     return render(
         request, "exito.html", {"pedido": pedido, "carro":carro_info, "total": total_compra})
 
@@ -61,6 +54,11 @@ def envio_email(pedido, linea_pedido, usuario):
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[usuario.email]
     )
+
+
+def generar_pdf(request):
+    if request.method == "POST":
+        data = request.POST.get("data")
 
 
 """

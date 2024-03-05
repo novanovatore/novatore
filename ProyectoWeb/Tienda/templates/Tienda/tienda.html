@@ -28,7 +28,7 @@
         <div style="text-align: center;">
             <div class="card-body">
             <h5 class="card-title">{{p.nombre}}</h5>
-            <p class="card-text">Precio: ${{p.precio}}</p>
+            <p class="card-text">Precio: CLP ${{p.precio}}</p>
             <p class="card-text">Stock: {% if p.disponibilidad %}Sí{% else %}Agotado{% endif %}</p>
             {% if request.user.is_authenticated %}
                 {% if p.disponibilidad %}

@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path("", views.procesar_pedido, name="pedido"),
-    #path("descargar/", views.descargar_pdf, name="descargar_pdf"),
+    path("generar_pdf/", views.generar_pdf, name="generar_pdf"),
 ]
