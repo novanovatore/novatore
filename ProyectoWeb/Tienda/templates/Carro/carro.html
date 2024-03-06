@@ -1,0 +1,80 @@
+{% extends "Aplicacion1/base.html" %}
+
+{% block title %} Carro {% endblock %}
+
+{% block cabecera %}Tu carro de compras{% endblock %}
+
+{% block content %}
+
+
+<div style="width: 80%; margin: auto;">
+
+    <table class="table table-bordered">
+    
+        <thead>
+            <tr>
+                <th colspan="3" class="text-center">
+                    Carro
+                </th>
+            </tr>
+        
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Suma</th>
+            </tr>
+        </thead> <!--fin del table head-->
+        
+        <tbody>
+            {% if request.session.carro.items %}
+                {% for key, value in request.session.carro.items %}
+                    <tr class="text-center">
+                        <td>
+                            {{value.nombre}}
+                        </td>
+                        <td>
+                            {{value.cantidad}}
+                        </td>
+                        <td>
+                            <a href="{% url 'carro:agregar' value.id_producto 'carro' %}" class="btn btn-primary">+</a>
+                            <a href="{% url 'carro:restar' value.id_producto %}" class="btn btn-primary">-</a>
+                            <a href="{% url 'carro:eliminar' value.id_producto %}" class="btn btn-primary">C</a>
+                            <p>${{value.precio}}</p>
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+                <a href="{% url 'carro:limpiar' %}" class="btn btn-danger me-2 mb-2">Limpiar Carro</a>
+        
+            {% else %}
+                <tr>
+                    <th colspan="3">
+                        <div class="alert alert-danger text-center">
+                            Sin Productos
+                        </div>
+                    </th>
+                </tr>
+            {% endif %}
+            <tr>
+                <th colspan="3" class="text-center">
+                    <p>Total: CLP${{importe_total_carro}}</p>
+                </th>
+            </tr>
+        
+            {% if request.session.carro.items %}
+            <tr>
+                <th colspan="3" class="text-center">
+                    <a href="{% url 'pedido' %}" class="btn btn-primary">Hacer Pedido</a>
+                </th>
+            </tr>
+            {% endif %}
+        </tbody> <!--fin de tbody-->
+        
+        
+        
+        </table>
+
+    <a href="{% url 'tienda' %}" class="btn btn-primary">Volver</a>    
+</div>
+
+{% endblock %}

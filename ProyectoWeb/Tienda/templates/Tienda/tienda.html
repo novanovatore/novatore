@@ -6,8 +6,10 @@
 
 {% block content %}
 
+<div style="background-color: white;">
+<!--
 <div style="background-image: url('/media/tienda/tienda.jpg');">
-
+-->
 {% if request.user.is_authenticated %}
     <div style="float: right; margin-right: 10px;">
         {% include "Carro/widget.html" %}
@@ -21,7 +23,7 @@
 
     {% for p in productos %}
         <div class="col">
-        <div class="card" style="width: 15rem; margin-bottom: 5px;">
+        <div class="card" style="width: 300px; margin-bottom: 5px;">
         {% if p.imagen %}
         <img src="{{p.imagen.url}}" class="card-img-top" alt="">
         {% endif %}
@@ -33,7 +35,7 @@
             <p class="card-text">Stock: {% if p.disponibilidad %}Sí{% else %}Agotado{% endif %}</p>
             {% if request.user.is_authenticated %}
                 {% if p.disponibilidad %}
-                    <a href="{% url 'carro:agregar' p.id %}" class="btn btn-primary">Agregar al carro</a>
+                    <a href="{% url 'carro:agregar' p.id 'tienda' %}" class="btn btn-primary">Agregar al carro</a>
                 {% endif %}
             {% else %}
                 <div class="alert alert-danger text-center">Ingresa para comprar</div>

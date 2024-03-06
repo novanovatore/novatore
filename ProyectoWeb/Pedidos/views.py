@@ -6,6 +6,10 @@ from Carro.Carro import Carro
 from django.core.mail import send_mail
 from django.conf import settings
 
+# esto es necesario para la generación de pdf #
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from weasyprint import HTML
 import os
 
 os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
@@ -81,10 +85,6 @@ def envio_email(pedido, compra, total_compra, usuario):
 
 
 #----- pdf esto aun no esta terminado -----#
-from django.template.loader import render_to_string
-from django.http import HttpResponse
-from weasyprint import HTML
-
 def generar_pdf(request):
     if request.method == "POST":
         compra = request.POST.get("compra")
@@ -95,7 +95,7 @@ def generar_pdf(request):
             request=request)
 
         print("render\n", html_string)
-        # Crea un objeto HTML a partir de la cadena HTML
+        # Crea un objeto HTML a partir del string
         html = HTML(string=html_string)
 
         # Genera el PDF
@@ -103,7 +103,5 @@ def generar_pdf(request):
 
         # Crea una respuesta HTTP con el contenido del PDF
         response = HttpResponse(pdf_file, content_type='pdf')
-        response['Content-Disposition'] = 'attachment; filename="mi_archivo.pdf"'
+        response['Content-Disposition'] = 'attachment; filename="archivo.pdf"'
         return response
-#-------------#
-

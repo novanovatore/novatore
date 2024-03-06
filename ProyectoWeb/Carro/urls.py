@@ -7,9 +7,10 @@ from . import views
 app_name = "carro"
 
 urlpatterns = [
-    path("agregar/<int:producto_id>/", views.agrega_producto, name="agregar"),
+    path("agregar/<int:producto_id>/<pagina>", views.agrega_producto, name="agregar"),
     path("eliminar/<int:producto_id>/", views.elimina_producto, name="eliminar"),
     path("resta/<int:producto_id>/", views.resta_producto, name="restar"),
     path("limpia/", views.limpia_carro, name="limpiar"),
+    path("carro/", views.muestra_carro, name="carro"),
 
 ]
