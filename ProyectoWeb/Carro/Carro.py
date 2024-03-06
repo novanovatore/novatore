@@ -1,6 +1,17 @@
 
-
 class Carro():
+    """
+    Carro de compras.
+    
+    Este carro de compras contiene los productos que el usuario
+    quiere comprar. Contiene lo siguiente:
+    - id del producto
+    - nombre
+    - cantidad
+    - precio
+    - imagen
+    
+    """
     def __init__(self, request):
         # almacenamos la peticion actual para poder usarla más adelante
         self.request = request
@@ -89,3 +100,10 @@ class Carro():
 
         return carro_info
 
+    def get_compra_str(self):
+        compra = ""
+        for key, value in self.carro.items():
+            producto = f"Producto: {value['nombre']}\nCantidad: {value['cantidad']}\nPrecio: {value['precio']}\n\n"
+            compra += producto
+
+        return compra            

@@ -7,11 +7,14 @@
 
 {% block content %} 
 
+<div style="background-image: url('/media/autenticacion/registro.jpg'); padding: 5%;">
+
+<div style="width: 50%; margin: auto; background-color: white; padding: 2%;">
 <!--MENSAJES-->
 {% if messages %}
     <div class="messages text-center" style="margin-bottom: 2%;">
         {% for message in messages %}
-            <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}" style="width: 60%; margin: auto;">
+            <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}" style="width: 50%; margin: auto;">
                 {{ message }}
             </div>
         {% endfor %}
@@ -30,4 +33,6 @@
     </form>
 </div> <!--end div form-->
 
+</div>
+</div>
 {% endblock %}

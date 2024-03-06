@@ -6,6 +6,7 @@
 
 {% block content %}
 
+<div style="background-image: url('/media/tienda/tienda.jpg');">
 
 {% if request.user.is_authenticated %}
     <div style="float: right; margin-right: 10px;">
@@ -16,7 +17,7 @@
 <div class="container">
 
 
-<div class="row">
+<div class="row" >
 
     {% for p in productos %}
         <div class="col">
@@ -53,6 +54,6 @@
         
 
 
-
+</div>
 
 {% endblock %}

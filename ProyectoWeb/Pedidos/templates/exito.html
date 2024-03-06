@@ -20,7 +20,7 @@
         
         <h3>Detalles del pedido:</h2>
         
-        <h4>Pedido ID: {{pedido.id}}</h3>
+        <h4>Pedido ID: {{pedido}}</h3>
     </div>
     
     <div class="container text-center" >
@@ -34,7 +34,8 @@
             </thead>
     
             <tbody>
-                {% for _, producto in carro.items %}
+                {% for key, producto in carro.items %}
+                
                 <tr>
                     <td>
                         {{producto.nombre}}
@@ -63,11 +64,15 @@
         <!--pdf-->
         <form id="pdf_form" method="post" action="{% url 'generar_pdf' %}" style="display: none;">
             {% csrf_token %}
-            <input type="hidden" name="data" value="{{ data }}">
+            <input type="hidden" name="pedido" value="{{ pedido }}">
+            <input type="hidden" name="carro" value="{{ carro }}">
+            <input type="hidden" name="total" value="{{ total }}">
         </form>
         
+        <!-- 
         <button id="pdf_button" class="btn btn-primary" type="submit">Descargar pdf</button>
-    
+        -->
+        
     </div>    
 </div>   
 

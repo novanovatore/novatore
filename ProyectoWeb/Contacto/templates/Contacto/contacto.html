@@ -8,6 +8,20 @@
 
 {% block content %} 
 
+<div style="background-image: url('/media/contacto/contacto.jpg'); padding: 1%;">
+
+    <!--MENSAJES-->
+    {% if messages %}
+    <div class="messages text-center" style="margin-bottom: 2%;">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}" style="width: 60%; margin: auto;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
 {% if "valido" in request.GET %}
     <script>alert("Mensaje enviado");</script>
 
@@ -15,7 +29,7 @@
     <script>alert("Error");</script>
 {% endif %}
 
-<div style="width:50%; margin:auto;">
+<div style="width:50%; margin:auto; background-color: white; padding: 2%;">
     <form action="{% url 'contacto' %}", method="POST">
         {% csrf_token %}
         {{formulario|crispy}}
@@ -29,5 +43,5 @@
 
 </div><!--end div form-->
 
-
+</div>
 {% endblock %}

@@ -1,12 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from Carro.context_processor import importe_total_carro
 from .models import *
 from Carro.Carro import Carro
-from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 
+import os
+
+os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
 
 # Create your views here.
 
@@ -37,49 +39,62 @@ def procesar_pedido(request):
 
     # limpiamos el carro
     total_compra = importe_total_carro(request)["importe_total_carro"]
+    info_compra = carro.get_compra_str()
     carro_info = carro.limpia_carro()
 
-    #datos_pedido = configura_linea_pedido_email(pedido)
     # mandamos el email con el pedido
-    envio_email(pedido, linea_pedido_carro, request.user)
+    envio_email(
+        pedido=pedido, 
+        compra=info_compra, 
+        total_compra=total_compra,
+        usuario=request.user)
 
     return render(
         request, "exito.html", {"pedido": pedido, "carro":carro_info, "total": total_compra})
 
 
-def envio_email(pedido, linea_pedido, usuario):
+
+
+
+def envio_email(pedido, compra, total_compra, usuario):
     send_mail(
         subject="Pedido Realizado",
-        message="",
+        message=f"Estimado {usuario.username}\nEl pedido ID:{pedido} fue realizado con éxito.\nSu carro de compras es el siguiente:\n\n{compra}\nEl total de la compra es: CLP${total_compra}\nMuchas gracias.",
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[usuario.email]
     )
 
 
+
+
+
+#----- pdf esto aun no esta terminado -----#
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from weasyprint import HTML
+
 def generar_pdf(request):
     if request.method == "POST":
-        data = request.POST.get("data")
+        pedido = request.POST.get("pedido")
+        print(pedido)
+        carro_info = request.POST.get("carro")
+        print(carro_info)
+        total_compra = request.POST.get("total")
+        html_string = render_to_string(
+            template_name='exito.html',
+            context={"pedido": pedido, "carro":carro_info, "total": total_compra},
+            request=request)
 
+        print("render\n", html_string)
+        # Crea un objeto HTML a partir de la cadena HTML
+        html = HTML(string=html_string)
 
-"""
-def configura_linea_pedido_email(pedido):
-    print(pedido)
-    
-    # filtrame los productos que esten el pedido
-    productos_pedido = Producto.objects.filter(lineapedido__pedido_id=pedido.id)
-    # filtrame las lineaspedidos que sean parte
-    # del pedido
-    lineas_pedido = LineaPedido.objects.filter(pedido_id=pedido.id)
+        # Genera el PDF
+        pdf_file = html.write_pdf()
 
-    datos_pedido = {
-        "pedido": pedido,
-        "lineas_pedido": lineas_pedido,
-        "productos": productos_pedido
-    }
-
-
-    return datos_pedido
-"""
-    
-    
+        # Crea una respuesta HTTP con el contenido del PDF
+        response = HttpResponse(pdf_file, content_type='pdf')
+        response['Content-Disposition'] = 'attachment; filename="mi_archivo.pdf"'
+        return response
+#-------------#
 

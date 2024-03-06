@@ -3,6 +3,7 @@ from .forms import *
 from django.urls import reverse
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib import messages
 
 # Create your views here.
 def contacto(request):
@@ -17,6 +18,12 @@ def contacto(request):
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [settings.EMAIL_HOST_USER]
 
+
+            send_mail(subject, message, email_from, recipient_list)
+            
+            messages.success(request, "Mensaje recibido. Gracias")
+
+            """
             url = reverse("contacto")
             
             try:
@@ -28,6 +35,6 @@ def contacto(request):
                 url += "?valido=0"
 
             return redirect(url) 
-
+            """
     return render(request, "Contacto/contacto.html", {"formulario": formulario})
 

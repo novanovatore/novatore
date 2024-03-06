@@ -7,7 +7,11 @@
 
 {% block content %} 
 
-<!--MENSAJES-->
+<div style="background-image: url('/media/autenticacion/registro.jpg'); padding: 1%;">
+
+<div style="width: 60%; margin: auto; background-color: white; padding: 2%;">
+
+    <!--MENSAJES-->
 {% if messages %}
     <div class="messages text-center" style="margin-bottom: 2%;">
         {% for message in messages %}
@@ -20,7 +24,7 @@
 
 
 <!--form-->
-<div style="width: 60%; margin: auto;">
+<div>
     <form action="{% url 'auth_reg_user' %}" method="post">
         {% csrf_token %}
         {{form|crispy}}
@@ -30,4 +34,6 @@
     </form>
 </div> <!--end div form-->
 
+</div>
+</div>
 {% endblock %}

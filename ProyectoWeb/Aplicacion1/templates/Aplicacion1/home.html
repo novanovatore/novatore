@@ -1,7 +1,36 @@
 {% extends "Aplicacion1/base.html" %}
 
-{% block title %} Home {% endblock %}
+{% block title %} Home {% endblock %}height
 
-{% block cabecera %}Home{% endblock %}
+{% block cabecera %} Bienvenido! {% endblock %}
+
+
 {% block content %}
+
+<div class="text-center" style=" padding: 10px; width: 100%; height:720px; background-color: aqua;">
+    <img src="/media/home/home1.jpg" alt="home1" style="float: left; margin-right: 10px; width: 700px; height: 700px;">
+    
+    <div style="text-align: right;">
+        
+        <p class="text-center" style="color: white; font-size: 13pt;">Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).</p>
+        <div class="text-center">
+            <a href="{% url 'servicios' %}" class="btn btn-primary" style="width: 200px;">Visitar Servicios</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="text-center" style=" padding: 10px; width: 100%; height:720px; background-color: aqua;">
+    <img src="/media/home/home2.jpg" alt="home2" style="float: left; margin-right: 10px; width: 700px; height: 700px;">
+    
+    <div style="text-align: right;">
+        
+        <p class="text-center" style="color: white; font-size: 13pt;">Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).</p>
+        <div class="text-center">
+            <a href="{% url 'servicios' %}" class="btn btn-primary" style="width: 200px;">Visitar Servicios</a>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}
