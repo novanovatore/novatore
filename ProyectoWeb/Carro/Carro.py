@@ -94,16 +94,14 @@ class Carro():
         
     
     def limpia_carro(self):
-        carro_info = self.carro
         self.carro = {}
         self.guardar_carro()
 
-        return carro_info
 
     def get_compra_str(self):
         compra = ""
         for key, value in self.carro.items():
-            producto = f"Producto: {value['nombre']}\nCantidad: {value['cantidad']}\nPrecio: {value['precio']}\n\n"
+            producto = f"Producto: {value['nombre']}\nCantidad: {value['cantidad']}\nPrecio: CLP${value['precio']}\n\n"
             compra += producto
 
         return compra            

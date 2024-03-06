@@ -10,6 +10,7 @@
 
 <div style="background-color: white; width: 70%; margin:auto; padding: 3%;">
 
+    <!-- texto header-->
     <div class="container text-center">
     
         <div>
@@ -19,61 +20,32 @@
         
         
         <h3>Detalles del pedido:</h2>
-        
-        <h4>Pedido ID: {{pedido}}</h3>
-    </div>
-    
-    <div class="container text-center" >
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                </tr>
-            </thead>
-    
-            <tbody>
-                {% for key, producto in carro.items %}
-                
-                <tr>
-                    <td>
-                        {{producto.nombre}}
-                    </td>
-                    <td>
-                        {{producto.cantidad}}
-                    </td>
-                    <td>
-                        CLP $: {{producto.precio}}
-                    </td>
-                </tr>
-                {% endfor %}
-            
-                <tr>
-                    <td colspan="3">Total: CLP $: {{total}}</td>
-                </tr>
-            </tbody>
-        </table>
     
     </div>
+    <!--end texto header-->
     
-    <div class="container text-center">
+
+    <!-- white-space: pre-wrap; es para que tome los saltos de linea del string-->
+    <div class="container text-center" style="white-space: pre-wrap;">
+        {{compra}}
+    </div>
+    
+
+    <!-- botones-->
+    <div class="container text-center" id="botones">
     
         <a href="{% url 'home' %}" class="btn btn-outline-primary me-2">Volver</a>
         
         <!--pdf-->
         <form id="pdf_form" method="post" action="{% url 'generar_pdf' %}" style="display: none;">
             {% csrf_token %}
-            <input type="hidden" name="pedido" value="{{ pedido }}">
-            <input type="hidden" name="carro" value="{{ carro }}">
-            <input type="hidden" name="total" value="{{ total }}">
+            <input type="hidden" name="compra" value="{{ compra }}">
         </form>
         
-        <!-- 
-        <button id="pdf_button" class="btn btn-primary" type="submit">Descargar pdf</button>
-        -->
-        
-    </div>    
+        <button id="pdf_button" class="btn btn-primary" type="submit">Descargar pdf</button>        
+    </div>
+    <!--end container botones-->    
+
 </div>   
 
 <!-- esto es para que envíe el formulario -->

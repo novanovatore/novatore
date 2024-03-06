@@ -17,7 +17,10 @@ os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
 # login
 @login_required(login_url="{'login'}")
 def procesar_pedido(request):
-    
+    """
+    Procesa el pedido realizado y envía email al usuario
+    que efectuó el pedido.
+    """
     # creamos un pedido para el usuario activo
     pedido = Pedidos.objects.create(user=request.user)
     # recorrermos el carro para almacenarlo en 
@@ -40,31 +43,40 @@ def procesar_pedido(request):
     # limpiamos el carro
     total_compra = importe_total_carro(request)["importe_total_carro"]
     info_compra = carro.get_compra_str()
-    carro_info = carro.limpia_carro()
+    carro.limpia_carro()
 
     # mandamos el email con el pedido
-    envio_email(
+    texto_compra = envio_email(
         pedido=pedido, 
         compra=info_compra, 
         total_compra=total_compra,
         usuario=request.user)
 
     return render(
-        request, "exito.html", {"pedido": pedido, "carro":carro_info, "total": total_compra})
+        request, "exito.html", {"compra": texto_compra})
 
 
 
 
 
 def envio_email(pedido, compra, total_compra, usuario):
+    """
+    Envía email al usuario que realizó el pedido
+    - pedido: instancia de modelo Pedido
+    - compra: String
+    - total_compra: Float
+    - usuario: SimpleLazyObject
+    """
+    msg = f"Estimado {usuario.username}\nEl pedido ID:{pedido} fue realizado con éxito.\nSu carro de compras es el siguiente:\n\n{compra}\nEl total de la compra es: CLP${total_compra}\nMuchas gracias."
+    print(msg, type(msg))
     send_mail(
         subject="Pedido Realizado",
-        message=f"Estimado {usuario.username}\nEl pedido ID:{pedido} fue realizado con éxito.\nSu carro de compras es el siguiente:\n\n{compra}\nEl total de la compra es: CLP${total_compra}\nMuchas gracias.",
+        message=msg,
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[usuario.email]
     )
 
-
+    return msg
 
 
 
@@ -75,14 +87,11 @@ from weasyprint import HTML
 
 def generar_pdf(request):
     if request.method == "POST":
-        pedido = request.POST.get("pedido")
-        print(pedido)
-        carro_info = request.POST.get("carro")
-        print(carro_info)
-        total_compra = request.POST.get("total")
+        compra = request.POST.get("compra")
+
         html_string = render_to_string(
-            template_name='exito.html',
-            context={"pedido": pedido, "carro":carro_info, "total": total_compra},
+            template_name="exito.html",
+            context={"compra": compra},
             request=request)
 
         print("render\n", html_string)

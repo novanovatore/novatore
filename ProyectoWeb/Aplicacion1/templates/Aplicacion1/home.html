@@ -2,35 +2,111 @@
 
 {% block title %} Home {% endblock %}height
 
-{% block cabecera %} Bienvenido! {% endblock %}
+{% block cabecera %}¡Bienvenido{% if request.user.is_authenticated %}, {{request.user.username}}{% endif %}!{% endblock %}
 
 
 {% block content %}
 
-<div class="text-center" style=" padding: 10px; width: 100%; height:720px; background-color: aqua;">
-    <img src="/media/home/home1.jpg" alt="home1" style="float: left; margin-right: 10px; width: 700px; height: 700px;">
-    
-    <div style="text-align: right;">
-        
-        <p class="text-center" style="color: white; font-size: 13pt;">Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).</p>
-        <div class="text-center">
-            <a href="{% url 'servicios' %}" class="btn btn-primary" style="width: 200px;">Visitar Servicios</a>
-        </div>
+
+
+<div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class="my-3 py-3">
+      <h2 class="display-5">Asesorías informáticas</h2>
+      <p class="lead">¿Buscas digitalizar tu negocio? Consulta nuestras asesorías informáticas!</p>
+      <div class="text-center">
+          <a href="{% url 'servicios' %}" class="btn btn-primary" style="width: 200px;">Ver Asesorias</a>
+      </div>
     </div>
+    <div class="bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 500px; border-radius: 21px 21px 0 0;">
+        <img src="/media/home/home1.jpg" alt="Home1">
+    </div>
+  
+</div>
+
+<div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    
+    <div style="height: 1px; background-color: white;">
+    
+    </div>
+    <div class="my-3 py-3">
+      <h2 class="display-5">Softwares empresariales</h2>
+      <p class="lead">Quieres un software específico para tu empresa? Visita nuestro servicio de software!</p>
+      <div class="text-center">
+        <a href="{% url 'servicios' %}" class="btn btn-primary" style="width: 200px;">Ver Softwares</a>
+      </div>
+    </div>
+    <div class="bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 500px; border-radius: 21px 21px 0 0;">
+        <img src="/media/home/home2.jpg" alt="Home2">
+    </div>
+  
 </div>
 
 
-<div class="text-center" style=" padding: 10px; width: 100%; height:720px; background-color: aqua;">
-    <img src="/media/home/home2.jpg" alt="home2" style="float: left; margin-right: 10px; width: 700px; height: 700px;">
+
+<div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
     
-    <div style="text-align: right;">
-        
-        <p class="text-center" style="color: white; font-size: 13pt;">Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).</p>
-        <div class="text-center">
-            <a href="{% url 'servicios' %}" class="btn btn-primary" style="width: 200px;">Visitar Servicios</a>
-        </div>
+    <div style="height: 1px; background-color: white;">
+    
     </div>
+    <div class="my-3 py-3">
+      <h2 class="display-5">Comprar productos</h2>
+      <p class="lead">También vendemos productos que podrías necesitar, hecha un vistazo!</p>
+      <div class="text-center">
+        <a href="{% url 'tienda' %}" class="btn btn-primary" style="width: 200px;">Tienda</a>
+      </div>
+    </div>
+    <div class="bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 500px; border-radius: 21px 21px 0 0;">
+        <img src="/media/home/home3.png" alt="Home3">
+    </div>
+  
 </div>
+
+
+
+
+
+<div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    
+    <div style="height: 1px; background-color: white;">
+    
+    </div>
+    <div class="my-3 py-3">
+      <h2 class="display-5">Una lectura rápida</h2>
+      <p class="lead">¿Buscas datos interesantes sobre digitalización? Revisa nuestras últimas publicaciones!</p>
+      <div class="text-center">
+        <a href="{% url 'blog' %}" class="btn btn-primary" style="width: 200px;">Blog</a>
+      </div>
+    </div>
+    <div class="bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 500px; border-radius: 21px 21px 0 0;">
+        <img src="/media/home/home4.jpg" alt="Home4">
+    </div>
+  
+</div>
+
+
+
+<div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    
+    <div style="height: 1px; background-color: white;">
+    
+    </div>
+    <div class="my-3 py-3">
+      <h2 class="display-5">Contacto</h2>
+      <p class="lead">¿Tienes propuestas para nosotros?</p>
+      <div class="text-center">
+        <a href="{% url 'contacto' %}" class="btn btn-primary" style="width: 200px;">Contáctanos</a>
+      </div>
+    </div>
+    <div class="bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 500px; border-radius: 21px 21px 0 0;">
+        <img src="/media/home/home5.jpg" alt="Home5">
+    </div>
+    
+
+</div>
+<div style="height: 50px; background-color: #212529;"></div>
+
+
+
 
 
 {% endblock %}
