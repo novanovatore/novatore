@@ -6,56 +6,75 @@
 
 {% block content %}
 
-<div style="background-color: white;">
-<!--
-<div style="background-image: url('/media/tienda/tienda.jpg');">
--->
+
+
+
+
+<!-- titulo -->
+<div class="container text-center my-3 text-light">
+    <h1>Tienda</h1>
+</div>
+<!-- end titulo -->
+
+
 {% if request.user.is_authenticated %}
+    <!-- carrito -->
     <div style="float: right; margin-right: 10px;">
         {% include "Carro/widget.html" %}
-    </div> <!--end div carrito-->
+    </div>
+    <!-- end carrito -->
 {% endif %}
 
-<div class="container">
 
 
-<div class="row" >
+{% if productos %}
 
-    {% for p in productos %}
-        <div class="col">
-        <div class="card" style="width: 300px; margin-bottom: 5px;">
-        {% if p.imagen %}
-        <img src="{{p.imagen.url}}" class="card-img-top" alt="">
-        {% endif %}
+<div class="album py-5">
+    <div class="container text-center">
+      <!-- fila -->
+      <div class="row">
+          {% for p in productos %}
+              <!-- columna -->
+              <div class="col-md-4">
+                  <!-- card -->
+                  <div class="card mb-4 shadow-sm">
+                      <!-- img -->
+                      <div class="text-center">
+                        {% if p.imagen %}
+                            <img src="{{p.imagen.url}}" class="card-img-top" alt="">
+                        {% endif %}
+                      </div>
+                      <!-- end img -->
 
-        <div style="text-align: center;">
-            <div class="card-body">
-            <h5 class="card-title">{{p.nombre}}</h5>
-            <p class="card-text">Precio: CLP ${{p.precio}}</p>
-            <p class="card-text">Stock: {% if p.disponibilidad %}Sí{% else %}Agotado{% endif %}</p>
-            {% if request.user.is_authenticated %}
-                {% if p.disponibilidad %}
-                    <a href="{% url 'carro:agregar' p.id 'tienda' %}" class="btn btn-primary">Agregar al carro</a>
-                {% endif %}
-            {% else %}
-                <div class="alert alert-danger text-center">Ingresa para comprar</div>
-            {% endif %}
-            </div> <!--end card-body-->          
-        </div> <!--end text-align div-->
-
-        </div> <!--end card-->
-        </div> <!--end col-->
-    
-    {% endfor %}
-</div><!--end row-->    
-    
-</div> <!--end container-->
-
-
-        
-        
-
-
+                      <!-- card body -->
+                      <div class="card-body">
+                            <h5 class="card-title">{{p.nombre}}</h5>
+                            <p class="card-text">Precio: CLP ${{p.precio}}</p>
+                            <p class="card-text">Stock: {% if p.disponibilidad %}Sí{% else %}Agotado{% endif %}</p>
+                            {% if request.user.is_authenticated %}
+                                {% if p.disponibilidad %}
+                                    <a href="{% url 'carro:agregar' p.id 'tienda' %}" class="btn btn-primary">Agregar al carro</a>
+                                {% endif %}
+                            {% else %}
+                                <div class="alert alert-danger text-center">Ingresa para comprar</div>
+                            {% endif %}						
+                      </div>
+                      <!-- end card body -->
+                  </div>
+                  <!-- end card -->
+              </div>
+              <!-- end columna -->
+          {% endfor %}
+      </div>
+      <!-- end fila -->
+  </div>
 </div>
+
+
+{% else %}
+    <p class="text-center">No hay productos disponibles</p>
+{% endif %}
+
+
 
 {% endblock %}

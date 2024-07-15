@@ -5,6 +5,62 @@
 {% block cabecera %}Categoría de Blog: {{ categoria }}{% endblock %}
 {% block content %} 
 
+
+
+<!-- titulo -->
+<div class="container text-center my-3 text-light">
+    <h1>Categoria: {{categoria}}</h1>
+</div>
+<!-- end titulo -->
+
+
+
+{% if posts %}
+
+<div class="album py-5">
+    <div class="container text-center">
+      <!-- fila -->
+      <div class="row">
+          {% for p in posts %}
+              <!-- columna -->
+              <div class="col-md-4">
+                  <!-- card -->
+                  <div class="card mb-4 shadow-sm">
+                    <div class="card-header py-3"><h3>{{p.titulo | capfirst}}</h3></div>
+                      <!-- img -->
+                      <div class="text-center">
+                        {% if p.imagen %}
+                            <img src="{{p.imagen.url}}" alt="imagen_{{p.titulo}}">
+                        {% endif %}
+                      </div>
+                      <!-- end img -->
+
+                      <!-- card body -->
+                      <div class="card-body">
+                            <p class="card-text">{% if p.contenido|length <= 50 %}{{p.contenido}}{% else %}{{p.contenido|slice:":50"}}...{% endif %}</p>
+                            <p class="card-text">Autor del post: {{p.autor}}</p>
+                            <p class="card-text">Última actualización: {{p.updated}}</p>
+                            					
+                      </div>
+                      <!-- end card body -->
+                  </div>
+                  <!-- end card -->
+              </div>
+              <!-- end columna -->
+          {% endfor %}
+      </div>
+      <!-- end fila -->
+  </div>
+</div>
+
+
+
+{% else %}
+    <p>Nada para mostrar aquí...</p>
+
+{% endif %}
+
+
 <div style="background-image: url('/media/Blog/blog.jpg');">
 {% if posts %}
 <div class="container" style="padding: 1%;">
@@ -54,7 +110,10 @@
 
 {% endif %}
 
-<a href="{% url 'blog' %}" class="btn btn-primary mb-3 mx-3">Volver</a>  
+<div class="text-center my-5">
+    <a href="{% url 'blog' %}" class="btn btn-danger mb-3 mx-3">Volver a Blog</a>
+</div>  
+
 </div>
 
 
