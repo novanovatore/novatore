@@ -2,17 +2,88 @@
 
 {% load crispy_forms_tags %}
 
+{% load static %}
 {% block title %} Contacto {% endblock %}
 
-{% block cabecera %}Contacto{% endblock %}
 
 {% block content %} 
 
-<div style="background-image: url('/media/contacto/contacto.jpg'); padding: 1%;">
 
+<!-- titulo -->
+<div class="container text-center mt-5 text-light">
+    <h1>Contacto</h1>
+</div>
+<!-- end titulo -->
+
+<div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class="my-3 py-3">
+        <h2 class="display-5">¿Alguna duda, problema o comentario?</h2>
+        <p class="lead">Esta es la sección de Contacto y Soporte dedicada a brindar 
+            asistencia personalizada a nuestros usuarios. Aquí, podrás encontrar diversas formas de comunicarte con nosotros, 
+            ya sea a través de un formulario de contacto, página de Instagram, o mediante nuestro servidor de Discord. 
+            Nuestro equipo de soporte está disponible para ayudarte con cualquier consulta, problema técnico o sugerencia que puedas tener, 
+            garantizando respuestas rápidas y soluciones eficientes. Tu satisfacción es nuestra prioridad, y estamos aquí para asegurarnos 
+            de que tu experiencia en nuestro sitio sea excelente.</p>
+    </div>
+    <div class="bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 500px; border-radius: 21px 21px 0 0;">
+        <img src="/media/home/home1.jpg" alt="Home1">
+    </div>
+  
+</div>
+
+<hr class="container my-5 text-light">
+
+
+<div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+
+    <!-- lista de redes -->
+    <div class="row">
+        <!-- instagram -->
+        <div class="col-lg-4">
+            <img src="{% static 'Aplicacion1/img/instagram_logo.svg'%}" width="140px" height="140px" alt="nfd">    
+            <h2>Instagram</h2>
+            <p>Nuestra red social principal. En Instagram podrás tener acceso a nuestra información y avisos rutinarios, además de ayuda
+                rápida sobre cualquier cosa que necesites acerca de nuestros servicios.
+            </p>
+            <p><a class="btn btn-primary" href="#">Visitar</a></p>
+        </div>
+        <!-- end instagram -->
+
+        <!-- discord -->
+        <div class="col-lg-4">
+            <img src="{% static 'Aplicacion1/img/discord_logo.svg'%}" width="140px" height="140px" alt="nfd">    
+    
+            <h2>Discord</h2>
+            <p>Nuestro servidor de Discord está disponible para cualquier consulta que necesites. Cuenta con la ventaja que nos puedes
+                videollamar para poder auxiliarte en caso de algún problema. Aquí brindamos un soporte más detallado.</p>
+            <p><a class="btn btn-primary" href="#">Visitar</a></p>
+        </div>
+        <!-- end discord -->
+
+        <!-- email -->
+        <div class="col-lg-4 ">
+            <img src="{% static 'Aplicacion1/img/email_logo.svg'%}" class="text-bg-light rounded" width="140px" height="140px" alt="nfd">    
+            
+            <h2>Email</h2>
+
+            <p>Nuestro medio de comunicación formal. Contáctate con nosotros mediante email para que siempre tengas un respaldo formal de 
+                las soluciones del soporte y para tener un seguimiento mucho más ordenado sobre tus consultas.</p>
+            <p><a class="btn btn-primary" href="#email_form">Contáctanos</a></p>
+        </div>
+        <!-- end email -->
+    </div>
+    <!-- end lista de redes -->
+</div>
+
+<hr class="container my-5 text-light">
+
+<!-- formulario email -->
+<div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+
+    <h1 class="my-3">Envíanos un email</h1>
     <!--MENSAJES-->
     {% if messages %}
-    <div class="messages text-center" style="margin-bottom: 2%;">
+    <div class="messages text-center">
         {% for message in messages %}
             <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}" style="width: 60%; margin: auto;">
                 {{ message }}
@@ -29,19 +100,20 @@
     <script>alert("Error");</script>
 {% endif %}
 
-<div style="width:50%; margin:auto; background-color: white; padding: 2%;">
-    <form action="{% url 'contacto' %}", method="POST">
-        {% csrf_token %}
-        {{formulario|crispy}}
-        <div class="d-flex justify-content-center ">
-            <button class="btn btn-primary" type="submit">Enviar</button>
-            <!--<input type="submit" value="Enviar" class="btn btn-primary">-->
-            
-        </div><!--end div button-->
+    <!-- form -->
+    <div class="container w-50 my-5 text-center">
+        <form action="{% url 'contacto' %}", method="POST" id="email_form">
+            {% csrf_token %}
+            {{formulario|crispy}}
+            <div class="d-flex justify-content-center ">
+                <button class="btn btn-primary" type="submit">Enviar</button>
+                
+            </div>
 
-    </form>
+        </form>
 
-</div><!--end div form-->
-
+    </div>
+    <!-- end form -->
 </div>
+<!-- end formulario email -->
 {% endblock %}

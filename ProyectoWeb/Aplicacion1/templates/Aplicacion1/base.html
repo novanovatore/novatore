@@ -99,7 +99,7 @@
                 {% if user.is_authenticated %}
                     <!-- logout -->
                     <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-                        <a href="#">
+                        <a href="{% url 'logout' %}">
                             <button class="btn btn-danger">Cerrar Sesión</button>
                         </a>
                     </div>
@@ -107,11 +107,11 @@
                 {% else %}
                     <!--  ingresar y registro-->
                     <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-                        <a href="#">
+                        <a href="{% url 'auth_login_user' %}">
                             <button class="btn btn-primary mx-3">Ingresar</button>
                         </a>
 
-                        <a href="#">
+                        <a href="{% url 'auth_reg_user' %}">
                             <button class="btn btn-secondary">Registro</button>
                         </a>
                     </div>

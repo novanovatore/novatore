@@ -4,13 +4,27 @@ from .models import *
 # Create your views here.
 
 def blog(request):
-    posts = Post.objects.all()
+    
+    posts = Post.objects.prefetch_related("categoria")
     print(posts)
+
+    post_mas_categoria = []
+    for p in posts:
+        post_mas_categoria.append(
+            {
+                "post": p, 
+                "categorias": p.categoria.all()
+            }
+        )
+    
+
 
     # retorna todas las categoria que tengan post asociados.
     categorias_con_posts = Categoria.objects.filter(post__isnull=False).distinct()
 
-    return render(request, "Blog/blog.html", {"posts": posts, "categorias": categorias_con_posts})
+    
+
+    return render(request, "Blog/blog.html", {"posts": post_mas_categoria, "categorias": categorias_con_posts})
 
 
 

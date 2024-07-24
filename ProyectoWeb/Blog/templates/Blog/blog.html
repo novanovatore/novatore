@@ -21,15 +21,15 @@
     <div class="container text-center">
       <!-- fila -->
       <div class="row">
-          {% for p in posts %}
+          {% for post in posts %}
               <!-- columna -->
               <div class="col-md-4">
                   <!-- card -->
                   <div class="card mb-4 shadow-sm">
-                    <div class="card-header py-3"><h3>{{p.titulo | capfirst}}</h3></div>
+                    <div class="card-header py-3"><h3>{{post.post.titulo | capfirst}}</h3></div>
                       <!-- img -->
                       <div class="text-center">
-                        {% if p.imagen %}
+                        {% if post.post.imagen %}
                             <img src="{{p.imagen.url}}" alt="imagen_{{p.titulo}}">
                         {% endif %}
                       </div>
@@ -37,10 +37,13 @@
 
                       <!-- card body -->
                       <div class="card-body">
-                            <p class="card-text">{% if p.contenido|length <= 50 %}{{p.contenido}}{% else %}{{p.contenido|slice:":50"}}...{% endif %}</p>
-                            <p class="card-text">Autor del post: {{p.autor}}</p>
-                            <p class="card-text">Autor del post: {{p.categoria}}</p>
-                            <p class="card-text">Última actualización: {{p.updated}}</p>
+                            <p class="card-text">{% if post.post.contenido|length <= 50 %}{{post.post.contenido}}{% else %}{{post.post.contenido|slice:":50"}}...{% endif %}</p>
+                            <p class="card-text text-start text-secondary">Autor del post: {{post.post.autor}}<br>
+                            Categoria: 
+                            {% for c in post.categorias %}
+                            {{c}} 
+                            {% endfor %}
+                            <br>Última actualización: {{post.post.updated}}</p>
                             					
                       </div>
                       <!-- end card body -->
@@ -54,7 +57,7 @@
   </div>
 </div>
 
-<div class="container text-center my-3 bg-light rounded">
+<div class="container text-center my-5 bg-light rounded">
     Categorías:    
     {% for c in categorias %}
         <a href="{% url 'categoria' c.id %}">{{ c }}</a>
@@ -68,7 +71,7 @@
 
 {% endif %}
 
-
+<hr class="my-5">
 
 
 
